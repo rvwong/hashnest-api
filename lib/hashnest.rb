@@ -96,6 +96,7 @@ module Hashnest
       uri = URI.parse(url)
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE #terrible security I know, but this is the only way its working for now
       params = Addressable::URI.new
       params.query_values = param
       https.post(uri.path, params.query).body
